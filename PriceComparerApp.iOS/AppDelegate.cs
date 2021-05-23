@@ -24,13 +24,12 @@ namespace PriceComparerApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-global::Xamarin.Forms.Forms.Init();
-SfBadgeViewRenderer.Init();
-            
+            Rg.Plugins.Popup.Popup.Init();      
+            SfBadgeViewRenderer.Init();            
 			SfListViewRenderer.Init();
-			
-			LoadApplication(new App());
 
+            global::Xamarin.Forms.Forms.Init();
+            LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
     }

@@ -17,9 +17,16 @@ namespace PriceComparerApp.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+            Rg.Plugins.Popup.Popup.Init(this);
 
+            Xamarin.Essentials.Platform.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+        }
+
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
     }
 }
