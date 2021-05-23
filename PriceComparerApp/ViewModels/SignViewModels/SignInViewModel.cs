@@ -1,4 +1,5 @@
 ﻿using PriceComparerApp.ApiServices;
+using PriceComparerApp.Behaviors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         public Action DisplayInvalidLoginPrompt;
         public Action DisplaySuccessLoginPrompt; //test
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
         private string login;
         public string Login
         {
@@ -38,6 +40,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         public ICommand SubmitCommand { set; get; }
         public SignInViewModel()
         {
+             
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
@@ -56,5 +59,6 @@ namespace PriceComparerApp.ViewModels.SignViewModels
                 DisplaySuccessLoginPrompt();
             }
         }
+         
     }
 }

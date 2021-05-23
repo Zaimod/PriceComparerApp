@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:behavior="clr-namespace:PriceComparerApp.Behaviors"
              xmlns:local="clr-namespace:PriceComparerApp.CustomRenderer" xmlns:signviewmodels="clr-namespace:PriceComparerApp.ViewModels.SignViewModels" x:DataType="signviewmodels:SignInViewModel"
              mc:Ignorable="d"
              x:Class="PriceComparerApp.Views.SignViews.SignInPage"
              Title="SignIn Page">
-    <StackLayout BackgroundColor="#e6e6e6">
+    <StackLayout BackgroundColor="#BA6DFE">
         <Grid>
             <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
                 <Frame HeightRequest="150" BackgroundColor="#7601DC" Padding="0" Margin="0">
@@ -15,37 +16,38 @@
                 </Frame>
             </StackLayout>
             <StackLayout Padding="0" Margin="10,100,10,0" HorizontalOptions="FillAndExpand">
-                <Frame  BackgroundColor="White" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
-
+                <Frame BackgroundColor="White" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
                     <StackLayout>
                         <StackLayout Margin="10">
                             <Label Text="SIGN IN" TextColor="Black" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"/>
                         </StackLayout>
 
                         <StackLayout Padding="0" Margin="15,10">
-
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
-
-                                    <local:CustomEntry x:Name="Login" Text="{Binding Login}" Placeholder="Login" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                    <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0" >
+                                        <Entry.Behaviors>
+                                            <behavior:MinMaxLengthValidatorBehavior MaxLength="25" MinLength="8" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                    
                                 </StackLayout>
                             </Frame>
 
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
-
-
-                                    <local:CustomEntry x:Name="Password" Text="{Binding Password}"   Placeholder="Password" IsPassword="True" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0"/>
+                                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                                        <Entry.Behaviors>
+                                            <behavior:PasswordValidationBehavior/>
+                                        </Entry.Behaviors>
+                                    </Entry>
                                 </StackLayout>
                             </Frame>
 
                             <StackLayout  Orientation="Horizontal">
                                 <CheckBox IsChecked="False" Color="#CB91FE" />
                                 <Label Text="Remember me" TextColor="Gray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-
                                 <Label Text="Forgot Password" TextColor="#BA6DFE" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-
-
                             </StackLayout>
 
                             <Button Command="{Binding SubmitCommand}" Text="SIGN IN" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" />
