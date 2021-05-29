@@ -26,9 +26,7 @@
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
                                     <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0" >
-                                        <Entry.Behaviors>
-                                            <behavior:MinMaxLengthValidatorBehavior MaxLength="25" MinLength="8" />
-                                        </Entry.Behaviors>
+                                      
                                     </Entry>
                                     
                                 </StackLayout>
@@ -37,9 +35,7 @@
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
                                     <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:PasswordValidationBehavior/>
-                                        </Entry.Behaviors>
+                                        
                                     </Entry>
                                 </StackLayout>
                             </Frame>
@@ -50,7 +46,7 @@
                                 <Label Text="Forgot Password" TextColor="#BA6DFE" FontAttributes="Bold" HorizontalOptions="EndAndExpand" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
                             </StackLayout>
 
-                            <Button Command="{Binding SubmitCommand}" Text="SIGN IN" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" />
+                            <Button Command="{Binding SubmitCommand}" x:Name="ClickSignIn" Clicked="ClickSignIn_Clicked"  Text="SIGN IN" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" />
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                 <Label Text="Still Not Connected ?" TextColor="Gray" FontSize="Small"/>
                                 <Label Text="Sign Up" TextColor="#BA6DFE" FontAttributes="Bold" FontSize="Small">

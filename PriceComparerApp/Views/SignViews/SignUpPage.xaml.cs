@@ -12,18 +12,19 @@ namespace PriceComparerApp.Views.SignViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpPage : ContentPage
     {
+        SignUpViewModel vm = new SignUpViewModel();
         public SignUpPage()
         {
-            var vm = new SignUpViewModel();
-            BindingContext = vm;
-            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
-
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+            
+            BindingContext = vm;
+            vm.DisplayInvalidRegisterPrompt += () => DisplayAlert("Error", "Invalid Register, try again", "OK");
+            vm.DisplaySuccessRegisterPrompt += () => DisplayAlert("Success", "You registrated!", "OK"); 
 
             FirstName.Completed += (object sender, EventArgs e) =>
-            {
-                LastName.Focus();
+            {  
+                LastName.Focus();       
             };
 
             LastName.Completed += (object sender, EventArgs e) =>
@@ -40,7 +41,6 @@ namespace PriceComparerApp.Views.SignViews
             {
                 Password.Focus();
             };
-
             Password.Completed += (object sender, EventArgs e) =>
             {
                 vm.SubmitCommand.Execute(null);
@@ -49,6 +49,26 @@ namespace PriceComparerApp.Views.SignViews
         private async void OnCloseButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private void ClickSignUp_Clicked(object sender_click, EventArgs e_click)
+        {
+            if (FirstName.TextColor.R == 1 || LastName.TextColor.R == 1 || UserName.TextColor.R == 1 ||
+                Email.TextColor.R == 1 || Password.TextColor.R == 1 || ConfirmPassword.TextColor.R == 1)
+            {
+                if (FirstName.Text.Equals("") || LastName.Text.Equals("") || UserName.Text.Equals("") ||
+                    Email.Text.Equals("") || Password.Text.Equals("") || ConfirmPassword.Text.Equals(""))
+                {
+                    DisplayAlert("Error", "Put all forms", "OK");
+                }
+                else
+                    DisplayAlert("Error", "Wrong, red text, please put text, again", "OK");
+            }
+            else
+            {
+                vm.OnSubmit();
+            }
+            
         }
     }
 }

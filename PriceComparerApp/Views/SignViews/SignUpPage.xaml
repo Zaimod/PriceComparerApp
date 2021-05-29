@@ -28,7 +28,7 @@
 
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="FirstName" Text="{Binding FirstName}"  Placeholder="First Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                                    <Entry x:Name="FirstName" Text="{Binding FirstName}" Placeholder="First Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
                                         <Entry.Behaviors>
                                             <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
                                         </Entry.Behaviors>
@@ -50,7 +50,7 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Entry x:Name="UserName" Text="{Binding UserName}"  Placeholder="User Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
                                         <Entry.Behaviors>
-                                            <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
+                                            <behavior:MinMaxLengthValidatorBehavior MinLength="4" MaxLength="20"/>
                                         </Entry.Behaviors>
                                     </Entry>
                                 </StackLayout>
@@ -78,7 +78,7 @@
 
                             <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                                 <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="ConfirmPassword" Text="{Binding ConfirmPassword}" IsPassword="True" Placeholder="Confirm Password" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
+                                    <Entry x:Name="ConfirmPassword" Text="{Binding ConfirmPassword}"  IsPassword="True" Placeholder="Confirm Password" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
                                         <Entry.Behaviors>
                                             <behavior:PasswordValidationBehavior/>
                                             <behavior:CompareValidationBehavior BindingContext="{x:Reference Password}" Text="{Binding Path=Text}"/>
@@ -86,8 +86,8 @@
                                     </Entry>
                                 </StackLayout>
                             </Frame>
-                            
-                            <Button Command="{Binding SubmitCommand}" Text="SIGN UP" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" Margin="0,20,0,0" />
+
+                            <Button  x:Name="ClickSignUp" Clicked="ClickSignUp_Clicked" Text="SIGN UP" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" Margin="0,20,0,0" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

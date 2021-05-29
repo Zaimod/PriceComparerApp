@@ -2,6 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PriceComparerApp.Views.CatalogListPage" Title="CatalogListPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" x:Name="ClickLogout" Clicked="ClickLogout_Clicked"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <ListView x:Name="catalogList" ItemsSource="{Binding items}" SelectedItem="{Binding selectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
@@ -17,5 +21,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
     </StackLayout>
 </ContentPage>

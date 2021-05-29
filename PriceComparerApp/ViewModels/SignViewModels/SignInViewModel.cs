@@ -1,5 +1,8 @@
 ﻿using PriceComparerApp.ApiServices;
 using PriceComparerApp.Behaviors;
+using PriceComparerApp.Models;
+using PriceComparerApp.ViewModels.CatalogViewModels;
+using PriceComparerApp.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,10 +15,14 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 {
     public class SignInViewModel : INotifyPropertyChanged
     {
+        private readonly Services.IMessageService messageService;
         public SignService signService;
         public Action DisplayInvalidLoginPrompt;
+        public Action DisplayInvalidCheckEmailPrompt;
         public Action DisplaySuccessLoginPrompt; //test
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        NavigationPage catalogListpage;
 
         private string login;
         public string Login
@@ -40,7 +47,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         public ICommand SubmitCommand { set; get; }
         public SignInViewModel()
         {
-             
+            this.messageService = DependencyService.Get<Services.IMessageService>();
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
@@ -48,17 +55,41 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         {
             var response = await signService.SignIn(login, password);
             if (string.IsNullOrEmpty(response.token))
-            {
+            {            
                 DisplayInvalidLoginPrompt();
             }
             else
             {
-                Preferences.Set("login", login);
-                Preferences.Set("password", password);
-                Preferences.Set("token", response.token);
-                DisplaySuccessLoginPrompt();
+                if (response.emailConfirmed)
+                {
+                    GetCatalogListPage(response);
+                }
+                else
+                {
+                    var responseCode = await signService.SendVerificationCode(login);
+                    string resultPopUpCode =  await messageService.ShowAsync();
+                    
+                    if (resultPopUpCode != null)
+                    {
+                        var responseChangeEmailConfirmed = await signService.ChangeEmailConfirmed(resultPopUpCode, login);
+                        if (responseCode && responseChangeEmailConfirmed)
+                        {
+                            GetCatalogListPage(response);
+                        }
+                        else
+                            DisplayInvalidCheckEmailPrompt();
+                    }
+                }             
             }
         }
-         
+        
+        public void GetCatalogListPage(TokenResponse response)
+        {
+            catalogListpage = new NavigationPage(new CatalogListPage());
+            Preferences.Set("login", login);
+            Preferences.Set("password", password);
+            Preferences.Set("token", response.token);
+            Application.Current.MainPage = catalogListpage;
+        }
     }
 }

@@ -1,4 +1,7 @@
 ﻿using PriceComparerApp.ApiServices;
+using PriceComparerApp.Models.DataTransferObjects;
+using PriceComparerApp.ViewModels.CatalogViewModels;
+using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,10 +15,12 @@ namespace PriceComparerApp.ViewModels.SignViewModels
     public class SignUpViewModel : INotifyPropertyChanged
     {
         public SignService signService;
-        public Action DisplayInvalidLoginPrompt;
-        public Action DisplaySuccessLoginPrompt; //test
+        public Action DisplayInvalidRegisterPrompt;
+        public Action DisplaySuccessRegisterPrompt; //test
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        NavigationPage signInpage;
 
+        #region Properties
         private string firstName;
         public string FirstName
         {
@@ -80,6 +85,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("ConfirmPassword"));
             }
         }
+        #endregion
 
         public ICommand SubmitCommand { set; get; }
 
@@ -90,7 +96,26 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         }
         public void OnSubmit()
         {
-             
+            UserForSignUpDto dto = new UserForSignUpDto()
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                UserName = UserName,
+                Email = Email,
+                Password = Password,
+                PhoneNumber = "",
+                Roles = new List<string>() { "User" }
+            };
+            var response = signService.SignUp(dto).Result;
+            if (response)
+            {
+                signInpage = new NavigationPage(new SignInPage());
+                Application.Current.MainPage = signInpage;
+            }
+            else
+            {
+                DisplayInvalidRegisterPrompt();
+            }
         }
     }
 }

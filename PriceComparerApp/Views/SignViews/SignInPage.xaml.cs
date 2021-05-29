@@ -14,12 +14,14 @@ namespace PriceComparerApp.Views.SignViews
     {
         public SignInPage()
         {         
-            var vm = new SignInViewModel();
+            NavigationPage.SetHasNavigationBar(this, false);
+            InitializeComponent();
+
+            SignInViewModel vm = new SignInViewModel();
             BindingContext = vm;
             vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
             vm.DisplaySuccessLoginPrompt += () => DisplayAlert("Success", "You autheticated!", "OK");
-            NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();
+            vm.DisplayInvalidCheckEmailPrompt += () => DisplayAlert("Error", "Wrong verification code", "OK");
 
             Login.Completed += (object sender, EventArgs e) =>
             {
@@ -41,5 +43,12 @@ namespace PriceComparerApp.Views.SignViews
         {
             Navigation.PushAsync(new SignUpPage());
         }
+
+        private void ClickSignIn_Clicked(object sender_click, EventArgs e_click)
+        {
+            
+        }
+
+        
     }
 }
