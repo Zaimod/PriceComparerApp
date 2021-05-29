@@ -1,9 +1,10 @@
-﻿using PriceComparerApp.Views.SignViews;
+﻿using PriceComparerApp.Views;
+using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PriceComparerApp
@@ -12,9 +13,12 @@ namespace PriceComparerApp
     {
         public App()
         {
+            DependencyService.Register<Services.IMessageService, Services.MessageService>();
             InitializeComponent();
-
-            MainPage = new NavigationPage(new SignInPage());
+            if(Preferences.Get("token", "").ToString().Equals(""))
+                MainPage = new NavigationPage(new SignInPage());
+            else
+                MainPage = new NavigationPage(new CatalogListPage());
         }
 
         protected override void OnStart()
