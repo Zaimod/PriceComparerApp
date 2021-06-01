@@ -20,7 +20,8 @@ namespace PriceComparerApp.Views.SignViews
             
             BindingContext = vm;
             vm.DisplayInvalidRegisterPrompt += () => DisplayAlert("Error", "Invalid Register, try again", "OK");
-            vm.DisplaySuccessRegisterPrompt += () => DisplayAlert("Success", "You registrated!", "OK"); 
+            vm.DisplaySuccessRegisterPrompt += () => DisplayAlert("Success", "You registrated!", "OK");
+            vm.DisplayInvalidCheckEmailPrompt += () => DisplayAlert("Error", "Wrong verification code", "OK");
 
             FirstName.Completed += (object sender, EventArgs e) =>
             {  
@@ -56,8 +57,8 @@ namespace PriceComparerApp.Views.SignViews
             if (FirstName.TextColor.R == 1 || LastName.TextColor.R == 1 || UserName.TextColor.R == 1 ||
                 Email.TextColor.R == 1 || Password.TextColor.R == 1 || ConfirmPassword.TextColor.R == 1)
             {
-                if (FirstName.Text.Equals("") || LastName.Text.Equals("") || UserName.Text.Equals("") ||
-                    Email.Text.Equals("") || Password.Text.Equals("") || ConfirmPassword.Text.Equals(""))
+                if (FirstName.Text == null || LastName.Text == null || UserName.Text == null ||
+                    Email.Text == null || Password.Text == null || ConfirmPassword.Text == null)
                 {
                     DisplayAlert("Error", "Put all forms", "OK");
                 }

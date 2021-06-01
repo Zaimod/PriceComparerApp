@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="PriceComparerApp.Views.MenuPage" Visual="Material"
+            xmlns:local="clr-namespace:PriceComparerApp.Views.MenuViews"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom">
+
+    <TabbedPage.Children>
+        <local:FavouritesPage  Title="Favourites" IconImageSource="favouriteLiked.png">
+        </local:FavouritesPage>
+        <local:CatalogListPage Title="Catalog" IconImageSource="homeCatalog.png">
+           
+        </local:CatalogListPage>
+        <local:CabinetPage Title="My Cabinet" IconImageSource="cabinet.png"/>
+    </TabbedPage.Children>
+</TabbedPage>

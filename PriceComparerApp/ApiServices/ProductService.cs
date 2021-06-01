@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PriceComparerApp.ApiServices
 {
-    public class CatalogService
+    public class ProductService
     {
         JsonSerializerOptions options = new JsonSerializerOptions
         {
@@ -24,20 +24,12 @@ namespace PriceComparerApp.ApiServices
             return client;
         }
 
-        public async Task<IEnumerable<CatalogDto>> Get()
+        public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             HttpClient client = GetClient();
-            string result = await client.GetStringAsync("http://192.168.0.192/api/catalog");
+            string result = await client.GetStringAsync("http://192.168.0.192/api/products");
 
-            return JsonSerializer.Deserialize<IEnumerable<CatalogDto>>(result, options);
-        }
-
-        public async Task<IEnumerable<CatalogDto>> GetBySearch(string stringSearch)
-        {
-            HttpClient client = GetClient();
-            string result = await client.GetStringAsync($"http://192.168.0.192/api/catalog/search/{stringSearch}");
-
-            return JsonSerializer.Deserialize<IEnumerable<CatalogDto>>(result, options);
+            return JsonSerializer.Deserialize<IEnumerable<ProductDto>>(result, options);
         }
     }
 }

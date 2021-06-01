@@ -8,7 +8,7 @@ namespace PriceComparerApp.Behaviors
 {
     public class PasswordValidationBehavior : Behavior<Entry>
     {
-        const string passwordRegex = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])?[A-Za-z\d$@$!%*#?&]{8,25}$";
+        const string passwordRegex = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])?[A-Za-z\d$@$!%*#?&]{10,25}$";
 
         protected override void OnAttachedTo(Entry entry)
         {

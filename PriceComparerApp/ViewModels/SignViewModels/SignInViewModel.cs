@@ -1,6 +1,7 @@
 ﻿using PriceComparerApp.ApiServices;
 using PriceComparerApp.Behaviors;
 using PriceComparerApp.Models;
+using PriceComparerApp.Services;
 using PriceComparerApp.ViewModels.CatalogViewModels;
 using PriceComparerApp.Views;
 using System;
@@ -15,7 +16,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 {
     public class SignInViewModel : INotifyPropertyChanged
     {
-        private readonly Services.IMessageService messageService;
+        private readonly IMessageService messageService;
         public SignService signService;
         public Action DisplayInvalidLoginPrompt;
         public Action DisplayInvalidCheckEmailPrompt;
@@ -47,7 +48,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         public ICommand SubmitCommand { set; get; }
         public SignInViewModel()
         {
-            this.messageService = DependencyService.Get<Services.IMessageService>();
+            this.messageService = DependencyService.Get<IMessageService>();
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
@@ -85,7 +86,7 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         
         public void GetCatalogListPage(TokenResponse response)
         {
-            catalogListpage = new NavigationPage(new CatalogListPage());
+            catalogListpage = new NavigationPage(new MenuPage());
             Preferences.Set("login", login);
             Preferences.Set("password", password);
             Preferences.Set("token", response.token);

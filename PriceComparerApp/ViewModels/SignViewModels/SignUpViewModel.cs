@@ -1,5 +1,6 @@
 ﻿using PriceComparerApp.ApiServices;
 using PriceComparerApp.Models.DataTransferObjects;
+using PriceComparerApp.Services;
 using PriceComparerApp.ViewModels.CatalogViewModels;
 using PriceComparerApp.Views.SignViews;
 using System;
@@ -14,8 +15,10 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 {
     public class SignUpViewModel : INotifyPropertyChanged
     {
+        private readonly IMessageService messageService;
         public SignService signService;
         public Action DisplayInvalidRegisterPrompt;
+        public Action DisplayInvalidCheckEmailPrompt;
         public Action DisplaySuccessRegisterPrompt; //test
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         NavigationPage signInpage;
@@ -91,10 +94,11 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 
         public SignUpViewModel()
         {
+            this.messageService = DependencyService.Get<IMessageService>();
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
-        public void OnSubmit()
+        public async void OnSubmit()
         {
             UserForSignUpDto dto = new UserForSignUpDto()
             {
@@ -107,10 +111,24 @@ namespace PriceComparerApp.ViewModels.SignViewModels
                 Roles = new List<string>() { "User" }
             };
             var response = signService.SignUp(dto).Result;
+
             if (response)
             {
-                signInpage = new NavigationPage(new SignInPage());
-                Application.Current.MainPage = signInpage;
+                var responseCode = await signService.SendVerificationCode(userName);
+                string resultPopUpCode = await messageService.ShowAsync();
+
+                if (resultPopUpCode != null)
+                {
+                    var responseChangeEmailConfirmed = await signService.ChangeEmailConfirmed(resultPopUpCode, userName);
+                    if (responseCode && responseChangeEmailConfirmed)
+                    {
+                        DisplaySuccessRegisterPrompt();
+                        signInpage = new NavigationPage(new SignInPage());
+                        Application.Current.MainPage = signInpage;
+                    }
+                    else
+                        DisplayInvalidCheckEmailPrompt();
+                }
             }
             else
             {
