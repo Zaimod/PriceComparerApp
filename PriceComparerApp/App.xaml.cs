@@ -18,7 +18,7 @@ namespace PriceComparerApp
             if(Preferences.Get("token", "").ToString().Equals(""))
                 MainPage = new NavigationPage(new SignInPage());
             else
-                MainPage = new NavigationPage(new CatalogListPage());
+                MainPage = new NavigationPage(new MenuPage());
         }
 
         protected override void OnStart()

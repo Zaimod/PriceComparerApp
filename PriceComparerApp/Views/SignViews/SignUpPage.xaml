@@ -7,87 +7,68 @@
              mc:Ignorable="d"
              x:Class="PriceComparerApp.Views.SignViews.SignUpPage"
              xmlns:local="clr-namespace:PriceComparerApp.CustomRenderer" xmlns:signviewmodels="clr-namespace:PriceComparerApp.ViewModels.SignViewModels" x:DataType="signviewmodels:SignUpViewModel"
-             Title="SignIn Page">
+             Title="SignIn Page" BackgroundImageSource="background.png">
 
-    <StackLayout BackgroundColor="#BA6DFE">
+    <StackLayout Visual="Material">
         <Grid>
-            <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
-                <Frame HeightRequest="150" BackgroundColor="#7601DC" Padding="0" Margin="0">
-                    <Image Source="https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg" Aspect="AspectFill" Margin="0"/>
-                </Frame>
-            </StackLayout>
             <StackLayout Padding="0" Margin="10,100,10,0" HorizontalOptions="FillAndExpand">
-                <Frame  BackgroundColor="White" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
-
+                <Frame CornerRadius="10">
                     <StackLayout>
                         <StackLayout Margin="10">
                             <Label Text="SIGN UP" TextColor="Black" HorizontalOptions="CenterAndExpand" FontAttributes="Bold"/>
                         </StackLayout>
 
-                        <StackLayout Padding="0" Margin="15,10">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="FirstName" Text="{Binding FirstName}" Placeholder="First Name" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
 
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="FirstName" Text="{Binding FirstName}" Placeholder="First Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="LastName" Text="{Binding LastName}"  Placeholder="Last Name" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
 
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="LastName" Text="{Binding LastName}"  Placeholder="Last Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:MinMaxLengthValidatorBehavior MinLength="3" MaxLength="20"/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="UserName" Text="{Binding UserName}"  Placeholder="User Name" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:MinMaxLengthValidatorBehavior MinLength="4" MaxLength="20"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
 
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="UserName" Text="{Binding UserName}"  Placeholder="User Name" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:MinMaxLengthValidatorBehavior MinLength="4" MaxLength="20"/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
-                            
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="Email" Text="{Binding Email}"  Placeholder="Email" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:EmailValidationBehavior/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
-                            
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="Password" Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:PasswordValidationBehavior/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="Email" Text="{Binding Email}"  Placeholder="Email" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:EmailValidationBehavior/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
 
-                            <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
-                                <StackLayout Orientation="Horizontal">
-                                    <Entry x:Name="ConfirmPassword" Text="{Binding ConfirmPassword}"  IsPassword="True" Placeholder="Confirm Password" TextColor="Gray" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="20,0,20,0">
-                                        <Entry.Behaviors>
-                                            <behavior:PasswordValidationBehavior/>
-                                            <behavior:CompareValidationBehavior BindingContext="{x:Reference Password}" Text="{Binding Path=Text}"/>
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </StackLayout>
-                            </Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="Password" Text="{Binding Password}" IsPassword="True" Placeholder="Password" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:PasswordValidationBehavior/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
 
-                            <Button  x:Name="ClickSignUp" Clicked="ClickSignUp_Clicked" Text="SIGN UP" BackgroundColor="#7601DC" TextColor="White" CornerRadius="30" Margin="0,20,0,0" />
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="ConfirmPassword" Text="{Binding ConfirmPassword}"  IsPassword="True" Placeholder="Confirm Password" HorizontalOptions="FillAndExpand">
+                                    <Entry.Behaviors>
+                                        <behavior:PasswordValidationBehavior/>
+                                        <behavior:CompareValidationBehavior BindingContext="{x:Reference Password}" Text="{Binding Path=Text}"/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </StackLayout>
+
+                            <Button  x:Name="ClickSignUp" Clicked="ClickSignUp_Clicked" Text="SIGN UP" TextColor="Black" BackgroundColor="#a5d6a7" Margin="0,20,0,10"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>

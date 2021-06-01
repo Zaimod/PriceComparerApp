@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PriceComparerApp.Views.MenuViews.CatalogListPage" Visual="Material"
+             Padding="10" Title="Catalog">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Filter List" Order="Primary" Priority="1" IconImageSource="filterList.png" x:Name="ClickFilterList" Clicked="ClickFilterList_Clicked"/>
+        <ToolbarItem Text="Sort" Order="Primary" Priority="2" IconImageSource="sort.png" x:Name="ClickSort" Clicked="ClickSort_Clicked"/>
+        <ToolbarItem Text="Logout" Order="Secondary" Priority="3" IconImageSource="moreVert.png" x:Name="ClickLogout" Clicked="ClickLogout_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        <SearchBar x:Name="searchBar"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="CenterAndExpand"
+                   Placeholder="Search"
+                   TextChanged="searchBar_TextChanged" BackgroundColor="#a5d6a7" />
+        
+        
+        <ListView x:Name="catalogList" ItemsSource="{Binding items}" 
+                  IsPullToRefreshEnabled="True"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  ItemTapped="catalogList_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image HeightRequest="60" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" WidthRequest="66" Grid.RowSpan="2" Source="{Binding img}"/>
+                            <Label Grid.Column="1" Text="{Binding title}" VerticalOptions="End"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalOptions="Start" Text="{Binding description}"/>
+                        </Grid>
+                        <!--<ViewCell.View>
+                            <StackLayout>
+                                <Label Text="{Binding title}" FontSize="Medium"/>
+                            </StackLayout>
+                        </ViewCell.View>-->
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
+    

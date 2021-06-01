@@ -10,7 +10,7 @@ namespace PriceComparerApp.Services
     {
         public async Task<string> ShowAsync()
         {
-           return await App.Current.MainPage.DisplayPromptAsync("Attention", "Invalid Check email.\nWe sent message with code on your email.Please check and put code here", maxLength: 6, keyboard: Keyboard.Numeric);
+           return await App.Current.MainPage.DisplayPromptAsync("Attention", "Invalid Check email.\nWe sent message with code on your email.Please check and put code here\nExpiration time: 3 minutes!", maxLength: 6, keyboard: Keyboard.Numeric);
         }
     }
 }
