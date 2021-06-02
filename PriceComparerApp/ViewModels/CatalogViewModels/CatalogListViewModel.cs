@@ -16,11 +16,14 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
 {
     public class CatalogListViewModel : INotifyPropertyChanged
     {
-        bool initialized = false;
-        private bool isBusy;
-        public ObservableCollection<ProductDto> items { get; set; }
+        private bool initialized = false;
+
         ProductService productService = new ProductService();
+        CategoryService categoryService = new CategoryService();
+        
+        public ObservableCollection<ProductDto> items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand BackCommand { protected set; get; }      
         public INavigation Navigation { get; set; }
 
@@ -42,6 +45,7 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
             }
         }
 
+        private bool isBusy;
         public bool IsBusy
         {
             get { return isBusy; }
@@ -52,6 +56,7 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
                 OnPropertyChanged("IsLoaded");
             }
         }
+
         public bool IsLoaded
         {
             get { return !isBusy; }
@@ -85,7 +90,7 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
                 {
                     IsRefreshing = true;
 
-                    await GetItemsAfterRefreshing();
+                    await GetItems(true);
                     
                     IsRefreshing = false;
                 });
@@ -103,28 +108,14 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
             Navigation.PopAsync();
         }
 
-        public async Task GetItems()
+        public async Task GetItems(bool refresh = false)
         {
-            if (initialized == true) 
+            if (initialized == true && refresh == false) 
                 return;
             IsBusy = true;
+
             IEnumerable<ProductDto> catalogDto = await productService.GetProducts();
-
-            while (items.Any())
-                items.RemoveAt(items.Count - 1);
-
-            foreach (ProductDto f in catalogDto)
-                items.Add(f);
-
-            IsBusy = false;
-            initialized = true;
-        }
-
-        public async Task GetItemsAfterRefreshing()
-        {
-            IsBusy = true;
-            IEnumerable<ProductDto> catalogDto = await productService.GetProducts();
-
+            catalogDto = catalogDto.OrderByDescending(nb => nb.numbReviews);
             while (items.Any())
                 items.RemoveAt(items.Count - 1);
 

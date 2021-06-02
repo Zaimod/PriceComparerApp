@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,9 @@ namespace PriceComparerApp.Views.MenuViews
     {
         public CabinetPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+            
         }
     }
 }

@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Rg.Plugins.Popup.Extensions;
 
 namespace PriceComparerApp.Views.MenuViews
 {
@@ -19,12 +20,13 @@ namespace PriceComparerApp.Views.MenuViews
         CatalogListViewModel catalogListViewModel;
         //bool isLoading;
         //Page page;
-        Xamarin.Forms.ListView listview = new Xamarin.Forms.ListView();
         public CatalogListPage()
         {
+            
             InitializeComponent();
             catalogListViewModel = new CatalogListViewModel() { Navigation = this.Navigation };
             BindingContext = catalogListViewModel;
+            Subscribe();
         }
 
         protected override async void OnAppearing()
@@ -74,6 +76,14 @@ namespace PriceComparerApp.Views.MenuViews
         //    });
         //}
 
+        private void Subscribe()
+        {
+            MessagingCenter.Subscribe<App, string>(App.Current, "SortItemsByFilter", (snd, arg) =>
+            {
+                Sorting(arg);
+            });
+        }
+
         private async void ClickLogout_Clicked(object sender, EventArgs e)
         {
             Preferences.Set("token", "");
@@ -82,12 +92,34 @@ namespace PriceComparerApp.Views.MenuViews
 
         private void ClickFilterList_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushPopupAsync(new FilterListPage());
         }
 
         private void ClickSort_Clicked(object sender, EventArgs e)
         {
+            Navigation.PushPopupAsync(new SortPage());
+        }
 
+        private void Sorting(string type = null)
+        {
+            string filterText = type;
+
+            if (filterText != "" || filterText != null)
+            {
+                var _container = BindingContext as CatalogListViewModel;
+                catalogList.BeginRefresh();
+
+                if (filterText == "byAscending")
+                    catalogList.ItemsSource = _container.items.OrderBy(t => t.title);
+                else if (filterText == "byDescending")
+                    catalogList.ItemsSource = _container.items.OrderByDescending(t => t.title);
+                else if(filterText == "byPopularityDesc")
+                    catalogList.ItemsSource = _container.items.OrderByDescending(t => t.numbReviews);
+                else if (filterText == "byPopularityAsc")
+                    catalogList.ItemsSource = _container.items.OrderBy(t => t.numbReviews);
+
+                catalogList.EndRefresh();
+            }
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -107,9 +139,7 @@ namespace PriceComparerApp.Views.MenuViews
         {
             var _container = BindingContext as CatalogListViewModel;
             catalogList.BeginRefresh();
-
             catalogList.ItemsSource = _container.items;
-
             catalogList.EndRefresh();
         }
 
