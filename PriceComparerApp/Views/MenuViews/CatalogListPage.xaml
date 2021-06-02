@@ -6,8 +6,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Filter List" Order="Primary" Priority="1" IconImageSource="filterList.png" x:Name="ClickFilterList" Clicked="ClickFilterList_Clicked"/>
-        <ToolbarItem Text="Sort" Order="Primary" Priority="2" IconImageSource="sort.png" x:Name="ClickSort" Clicked="ClickSort_Clicked"/>
-        <ToolbarItem Text="Logout" Order="Secondary" Priority="3" IconImageSource="moreVert.png" x:Name="ClickLogout" Clicked="ClickLogout_Clicked"/>
+        <ToolbarItem Text="Sort" Order="Primary" Priority="3" IconImageSource="sort.png" x:Name="ClickSort" Clicked="ClickSort_Clicked"/>
+        <ToolbarItem Text="Logout" Order="Secondary" Priority="3" IconImageSource="moreVert.png" x:Name="Logout" Clicked="ClickLogout_Clicked"/>
     </ContentPage.ToolbarItems>
     
     <StackLayout>
@@ -15,39 +15,39 @@
                    HorizontalOptions="Fill"
                    VerticalOptions="CenterAndExpand"
                    Placeholder="Search"
-                   TextChanged="searchBar_TextChanged" BackgroundColor="#a5d6a7" />
+                   TextChanged="searchBar_TextChanged" BackgroundColor="#a5d6a7" PlaceholderColor="White" />
         
         
         <ListView x:Name="catalogList" ItemsSource="{Binding items}" 
                   IsPullToRefreshEnabled="True"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
                   HasUnevenRows="True"
                   SeparatorVisibility="None"
-                  ItemTapped="catalogList_ItemTapped">
+                  ItemTapped="catalogList_ItemTapped"
+                  CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <Frame Padding="1">
+                            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.35*"/>
+                                    <ColumnDefinition Width="0.65*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="66" Grid.RowSpan="2" Source="{Binding img}"/>
+                                <Grid Grid.Column="1" Padding="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                            <Image HeightRequest="60" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" WidthRequest="66" Grid.RowSpan="2" Source="{Binding img}"/>
-                            <Label Grid.Column="1" Text="{Binding title}" VerticalOptions="End"/>
-                            <Label Grid.Column="1" Grid.Row="1" VerticalOptions="Start" Text="{Binding description}"/>
-                        </Grid>
-                        <!--<ViewCell.View>
-                            <StackLayout>
-                                <Label Text="{Binding title}" FontSize="Medium"/>
-                            </StackLayout>
-                        </ViewCell.View>-->
+                                    <Label Text="{Binding title}" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold" />
+                                    <Label Text="{Binding description}" Grid.Row="1" LineBreakMode="WordWrap" FontSize="Small"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
