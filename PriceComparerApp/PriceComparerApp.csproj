@@ -29,6 +29,12 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\MenuViews\CatalogPage.xaml.cs">
+      <DependentUpon>CatalogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MenuViews\HomeListPage.xaml.cs">
+      <DependentUpon>HomeListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SignViews\ConfromEmailPopupPage.xaml.cs">
       <DependentUpon>ConfromEmailPopupPage.xaml</DependentUpon>
     </Compile>
@@ -41,13 +47,13 @@
     <EmbeddedResource Update="Views\MenuViews\CabinetPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MenuViews\CatalogListPage.xaml">
+    <EmbeddedResource Update="Views\MenuViews\HomeListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MenuViews\FavouritesPage.xaml">
+    <EmbeddedResource Update="Views\MenuViews\CatalogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MenuViews\FilterListPage.xaml">

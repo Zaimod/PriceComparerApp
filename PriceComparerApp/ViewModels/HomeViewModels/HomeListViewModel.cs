@@ -12,14 +12,13 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using PriceComparerApp.Views;
 
-namespace PriceComparerApp.ViewModels.CatalogViewModels
+namespace PriceComparerApp.ViewModels.HomeViewModels
 {
-    public class CatalogListViewModel : INotifyPropertyChanged
+    public class HomeListViewModel : INotifyPropertyChanged
     {
         private bool initialized = false;
 
         ProductService productService = new ProductService();
-        CategoryService categoryService = new CategoryService();
         
         public ObservableCollection<ProductDto> items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,7 +27,7 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
         public INavigation Navigation { get; set; }
 
        
-        public CatalogListViewModel()
+        public HomeListViewModel()
         {
             items = new ObservableCollection<ProductDto>();
             BackCommand = new Command(Back);
@@ -108,13 +107,20 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
             Navigation.PopAsync();
         }
 
-        public async Task GetItems(bool refresh = false)
+        public async Task GetItems(bool refresh = false, int categoryId = 0)
         {
+
             if (initialized == true && refresh == false) 
                 return;
             IsBusy = true;
 
-            IEnumerable<ProductDto> catalogDto = await productService.GetProducts();
+            IEnumerable<ProductDto> catalogDto;
+
+            if (categoryId != 0)
+                catalogDto = await productService.GetProductsByCategory(categoryId);
+            else
+                catalogDto = await productService.GetProducts();
+
             catalogDto = catalogDto.OrderByDescending(nb => nb.numbReviews);
             while (items.Any())
                 items.RemoveAt(items.Count - 1);

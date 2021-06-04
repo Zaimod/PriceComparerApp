@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PriceComparerApp.Views.MenuViews.CabinetPage" Visual="Material">
-
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

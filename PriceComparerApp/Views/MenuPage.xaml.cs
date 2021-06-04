@@ -19,5 +19,10 @@ namespace PriceComparerApp.Views
 
             
         }
+
+        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
