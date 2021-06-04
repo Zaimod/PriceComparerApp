@@ -2,7 +2,7 @@
 using PriceComparerApp.Behaviors;
 using PriceComparerApp.Models;
 using PriceComparerApp.Services;
-using PriceComparerApp.ViewModels.CatalogViewModels;
+using PriceComparerApp.ViewModels.HomeViewModels;
 using PriceComparerApp.Views;
 using System;
 using System.Collections.Generic;

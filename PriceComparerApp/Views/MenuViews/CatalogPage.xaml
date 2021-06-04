@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PriceComparerApp.Views.MenuViews.CatalogPage"
+             Title="Catalog" Visual="Material">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Order="Secondary" Priority="3" IconImageSource="moreVert.png" x:Name="Logout" Clicked="Logout_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout> 
+        <SearchBar x:Name="searchBar"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="CenterAndExpand"
+                       Placeholder="Search"
+                       TextChanged="searchBar_TextChanged" BackgroundColor="#a5d6a7" PlaceholderColor="White" />
+    
+        <StackLayout Padding="10">
+            <ListView  x:Name="collectView" ItemsSource="{Binding items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                       HasUnevenRows="True"
+                       SeparatorVisibility="None"
+                       CachingStrategy="RetainElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame>
+                                <Image HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                         Source="{Binding UrlImage}"  Aspect="AspectFill" HeightRequest="130"/>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

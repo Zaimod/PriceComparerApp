@@ -7,11 +7,10 @@
             android:TabbedPage.ToolbarPlacement="Bottom">
 
     <TabbedPage.Children>
-        <local:FavouritesPage  Title="Favourites" IconImageSource="favouriteLiked.png">
-        </local:FavouritesPage>
-        <local:CatalogListPage Title="Catalog" IconImageSource="homeCatalog.png">
-           
-        </local:CatalogListPage>
+        <local:HomeListPage Title="Home" IconImageSource="homeCatalog.png"/>
+        <local:CatalogPage  Title="Catalog" IconImageSource="catalog.png"/>
         <local:CabinetPage Title="My Cabinet" IconImageSource="cabinet.png"/>
     </TabbedPage.Children>
+    
+     
 </TabbedPage>

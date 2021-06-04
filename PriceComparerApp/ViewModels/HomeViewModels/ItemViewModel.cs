@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace PriceComparerApp.ViewModels.CatalogViewModels
+namespace PriceComparerApp.ViewModels.HomeViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        CatalogListViewModel catalogListViewModel;
+        HomeListViewModel catalogListViewModel;
 
         public CatalogDto catalogDto { get; private set; }
 
@@ -18,7 +18,7 @@ namespace PriceComparerApp.ViewModels.CatalogViewModels
             catalogDto = new CatalogDto();
         }
 
-        public CatalogListViewModel ListViewModel
+        public HomeListViewModel ListViewModel
         {
             get { return catalogListViewModel; }
             set

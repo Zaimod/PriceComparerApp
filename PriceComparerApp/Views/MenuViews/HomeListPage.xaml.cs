@@ -1,5 +1,5 @@
 ﻿using Android.Webkit;
-using PriceComparerApp.ViewModels.CatalogViewModels;
+using PriceComparerApp.ViewModels.HomeViewModels;
 using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;
@@ -15,23 +15,27 @@ using Rg.Plugins.Popup.Extensions;
 namespace PriceComparerApp.Views.MenuViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CatalogListPage : ContentPage
+    public partial class HomeListPage : ContentPage
     {
-        CatalogListViewModel catalogListViewModel;
+        HomeListViewModel homeViewModel;
         //bool isLoading;
         //Page page;
-        public CatalogListPage()
-        {
-            
+        public int categoryId = 0;
+
+        public HomeListPage()
+        {            
             InitializeComponent();
-            catalogListViewModel = new CatalogListViewModel() { Navigation = this.Navigation };
-            BindingContext = catalogListViewModel;
+            homeViewModel = new HomeListViewModel() { Navigation = this.Navigation };
+            BindingContext = homeViewModel;
             Subscribe();
         }
 
         protected override async void OnAppearing()
         {
-            await catalogListViewModel.GetItems();
+            if (categoryId != 0)
+                await homeViewModel.GetItems(categoryId: categoryId);
+            else
+                await homeViewModel.GetItems();
             //catalogList.ItemAppearing += (sender, e) =>
             //{
             //    if (isLoading || catalogListViewModel.items.Count == 0)
@@ -106,41 +110,41 @@ namespace PriceComparerApp.Views.MenuViews
 
             if (filterText != "" || filterText != null)
             {
-                var _container = BindingContext as CatalogListViewModel;
-                catalogList.BeginRefresh();
+                var _container = BindingContext as HomeListViewModel;
+                homeList.BeginRefresh();
 
                 if (filterText == "byAscending")
-                    catalogList.ItemsSource = _container.items.OrderBy(t => t.title);
+                    homeList.ItemsSource = _container.items.OrderBy(t => t.title);
                 else if (filterText == "byDescending")
-                    catalogList.ItemsSource = _container.items.OrderByDescending(t => t.title);
+                    homeList.ItemsSource = _container.items.OrderByDescending(t => t.title);
                 else if(filterText == "byPopularityDesc")
-                    catalogList.ItemsSource = _container.items.OrderByDescending(t => t.numbReviews);
+                    homeList.ItemsSource = _container.items.OrderByDescending(t => t.numbReviews);
                 else if (filterText == "byPopularityAsc")
-                    catalogList.ItemsSource = _container.items.OrderBy(t => t.numbReviews);
+                    homeList.ItemsSource = _container.items.OrderBy(t => t.numbReviews);
 
-                catalogList.EndRefresh();
+                homeList.EndRefresh();
             }
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var _container = BindingContext as CatalogListViewModel;
-            catalogList.BeginRefresh();
+            var _container = BindingContext as HomeListViewModel;
+            homeList.BeginRefresh();
 
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
-                catalogList.ItemsSource = _container.items;
+                homeList.ItemsSource = _container.items;
             else
-                catalogList.ItemsSource = _container.items.Where(i => i.title.IndexOf(e.NewTextValue, StringComparison.OrdinalIgnoreCase) >= 0);
+                homeList.ItemsSource = _container.items.Where(i => i.title.IndexOf(e.NewTextValue, StringComparison.OrdinalIgnoreCase) >= 0);
 
-            catalogList.EndRefresh();
+            homeList.EndRefresh();
         }
 
         private void catalogList_Refreshing(object sender, EventArgs e)
         {
-            var _container = BindingContext as CatalogListViewModel;
-            catalogList.BeginRefresh();
-            catalogList.ItemsSource = _container.items;
-            catalogList.EndRefresh();
+            var _container = BindingContext as HomeListViewModel;
+            homeList.BeginRefresh();
+            homeList.ItemsSource = _container.items;
+            homeList.EndRefresh();
         }
 
         private async void catalogList_ItemTapped(object sender, ItemTappedEventArgs e)
