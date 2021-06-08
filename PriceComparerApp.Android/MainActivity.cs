@@ -26,7 +26,8 @@ namespace PriceComparerApp.Android
             Xamarin.Essentials.Platform.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);      
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
-
+            
+            ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
             CrossCurrentActivity.Current.Init(this.Application);
             LoadApplication(new App());
         }
@@ -39,7 +40,7 @@ namespace PriceComparerApp.Android
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+         
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

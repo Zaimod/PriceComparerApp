@@ -1,15 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PriceComparerApp.Views.ItemPage">
-    <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center">
-            <Label Text="Hello"/>
-            <Image x:Name="ImageCall" HeightRequest="100" WidthRequest="100"/>
-            <Label x:Name="ItemNameShow" HorizontalTextAlignment="Center"/>
-            <Label x:Name="DescriptionItemShow" Margin="20, 20" FontSize="Small"/>
+             x:Class="PriceComparerApp.Views.ItemPage" Visual="Material">
 
-            <Button x:Name="LikeButton" Text="Like" BackgroundColor="#75a478"/>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sort" Order="Primary" Priority="1" IconImageSource="sort.png" x:Name="ClickSort" Clicked="ClickSort_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <SearchBar x:Name="searchBar"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="CenterAndExpand"
+                   Placeholder="Search"
+                   TextChanged="searchBar_TextChanged" BackgroundColor="#a5d6a7" PlaceholderColor="White" />
+
+        <StackLayout Padding="10">
+            <ListView x:Name="homeList" ItemsSource="{Binding items}" 
+                      IsPullToRefreshEnabled="True"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemTapped="homeList_ItemTapped"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="1">
+                                <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.15*"/>
+                                        <ColumnDefinition Width="0.85*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="66" Grid.RowSpan="2" Source="{Binding UrlImageShop}"/>
+                                    <Grid Grid.Column="1" Padding="10,0,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Text="{Binding Name}" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold" />
+                                        <Label Text="{Binding NewPriceStr}" Grid.Row="1" LineBreakMode="WordWrap" FontAttributes="Bold" FontSize="Medium"/>
+                                        <Image Grid.Row="1" Source="favouriteLikedBlack.png" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand" WidthRequest="66">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
-    </ContentPage.Content>
+
+    </StackLayout>
 </ContentPage>

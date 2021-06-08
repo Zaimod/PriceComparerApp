@@ -1,5 +1,5 @@
 ﻿using Android.Webkit;
-using PriceComparerApp.ViewModels.HomeViewModels;
+using PriceComparerApp.ViewModels.CatalogViewModel;
 using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,6 @@ namespace PriceComparerApp.Views.MenuViews
         //bool isLoading;
         //Page page;
         public int categoryId = 0;
-
         public HomeListPage()
         {            
             InitializeComponent();

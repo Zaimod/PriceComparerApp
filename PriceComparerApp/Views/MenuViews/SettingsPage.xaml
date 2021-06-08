@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 mc:Ignorable="d"
+                 x:Class="PriceComparerApp.Views.MenuViews.SettingsPage" Visual="Material">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <Frame VerticalOptions="Center" 
+        HorizontalOptions="Center" >
+        <StackLayout  Padding="20, 20, 20, 20">
+            <Label Text="User Name:" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <Entry x:Name="entryUserName"/>
+
+            <Label Text="First Name:" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <Entry x:Name="entryFirstName"/>
+
+            <Label Text="Last Name:" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <Entry x:Name="entryLastName"/>
+
+            <Label Text="Data of Birth:" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <DatePicker Date="1/1/1901" x:Name="dateBirth"/>
+
+            <Label Text="Phone:" FontSize="Medium" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+            <Entry x:Name="entryPhone"/>
+            <Button Text="Save" BackgroundColor="#a5d6a7" TextColor="White" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

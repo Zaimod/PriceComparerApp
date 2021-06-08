@@ -20,7 +20,9 @@ namespace PriceComparerApp.Views.MenuViews
             InitializeComponent();
             catalogViewModel = new CatalogViewModel() { Navigation = this.Navigation };
             BindingContext = catalogViewModel;
+
         }
+
         protected override async void OnAppearing()
         {
             await catalogViewModel.GetItems();
@@ -49,6 +51,11 @@ namespace PriceComparerApp.Views.MenuViews
         {
             Preferences.Set("token", "");
             await Navigation.PushAsync(new SignInPage(), true);
+        }
+
+        private void Settings_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using PriceComparerApp.Models.DataTransferObjects;
-using PriceComparerApp.ApiServices;
-using PriceComparerApp.Views.MenuViews;
+﻿using PriceComparerApp.ApiServices;
+using PriceComparerApp.Models.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,27 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using PriceComparerApp.Views;
 
-namespace PriceComparerApp.ViewModels.HomeViewModels
+namespace PriceComparerApp.ViewModels.CatalogViewModel
 {
-    public class HomeListViewModel : INotifyPropertyChanged
+    public class ItemViewModel : INotifyPropertyChanged
     {
         private bool initialized = false;
-
-        ProductService productService = new ProductService();
         
-        public ObservableCollection<ProductDto> items { get; set; }
+        CatalogService catalogService = new CatalogService();
+
+
+        public ObservableCollection<CatalogDto> items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand BackCommand { protected set; get; }      
+        public ICommand BackCommand { protected set; get; }
         public INavigation Navigation { get; set; }
 
-       
-        public HomeListViewModel()
+
+        public ItemViewModel()
         {
-            items = new ObservableCollection<ProductDto>();
+            items = new ObservableCollection<CatalogDto>();
             BackCommand = new Command(Back);
         }
 
@@ -61,8 +61,19 @@ namespace PriceComparerApp.ViewModels.HomeViewModels
             get { return !isBusy; }
         }
 
-        ProductDto selectedItem;
-        public ProductDto SelectedItem
+        private int productId;
+        public int ProductId
+        {
+            get { return productId; }
+            set
+            {
+                productId = value;
+                OnPropertyChanged(nameof(ProductId));
+            }
+        }
+
+        CatalogDto selectedItem;
+        public CatalogDto SelectedItem
         {
             get { return selectedItem; }
             set
@@ -78,7 +89,8 @@ namespace PriceComparerApp.ViewModels.HomeViewModels
 
         private async void HandleSelectedItem()
         {
-            await Navigation.PushAsync(new ItemPage(SelectedItem.title, SelectedItem.description, SelectedItem.img));
+            //await Navigation.PushAsync(new ItemPage(selectedItem.Id));
+            await Browser.OpenAsync(new Uri(selectedItem.Url), BrowserLaunchMode.SystemPreferred);
         }
 
         public ICommand RefreshCommand
@@ -90,7 +102,7 @@ namespace PriceComparerApp.ViewModels.HomeViewModels
                     IsRefreshing = true;
 
                     await GetItems(true);
-                    
+
                     IsRefreshing = false;
                 });
             }
@@ -107,27 +119,25 @@ namespace PriceComparerApp.ViewModels.HomeViewModels
             Navigation.PopAsync();
         }
 
-        public async Task GetItems(bool refresh = false, int categoryId = 0)
+        public async Task GetItems(bool refresh = false)
         {
 
-            if (initialized == true && refresh == false) 
+            if (initialized == true && refresh == false)
                 return;
             IsBusy = true;
 
-            IEnumerable<ProductDto> catalogDto;
+            IEnumerable<CatalogDto> catalogDto = await catalogService.GetByProductId(productId);
 
-            if (categoryId != 0)
-                catalogDto = await productService.GetProductsByCategory(categoryId);
-            else
-                catalogDto = await productService.GetProducts();
-
-            catalogDto = catalogDto.OrderByDescending(nb => nb.numbReviews);
+            
             while (items.Any())
                 items.RemoveAt(items.Count - 1);
 
-            foreach (ProductDto f in catalogDto)
+            foreach (CatalogDto f in catalogDto)
+            {
+                f.UrlImageShop = $"store{f.StoreId}";
+                f.NewPriceStr = f.NewPrice + "₴";
                 items.Add(f);
-
+            }
             IsBusy = false;
             initialized = true;
         }

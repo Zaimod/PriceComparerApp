@@ -24,10 +24,10 @@ namespace PriceComparerApp.ApiServices
             return client;
         }
 
-        public async Task<IEnumerable<CatalogDto>> Get()
+        public async Task<IEnumerable<CatalogDto>> GetByProductId(int id)
         {
             HttpClient client = GetClient();
-            string result = await client.GetStringAsync("http://192.168.0.192/api/catalog");
+            string result = await client.GetStringAsync($"http://192.168.0.192/api/catalog/productId/{id}");
 
             return JsonSerializer.Deserialize<IEnumerable<CatalogDto>>(result, options);
         }
