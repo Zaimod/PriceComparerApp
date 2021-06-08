@@ -1,8 +1,10 @@
-﻿using PriceComparerApp.Views;
+﻿using Plugin.Connectivity;
+using PriceComparerApp.Views;
 using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -15,7 +17,7 @@ namespace PriceComparerApp
         {
             DependencyService.Register<Services.IMessageService, Services.MessageService>();
             InitializeComponent();
-            if(Preferences.Get("token", "").ToString().Equals(""))
+            if (Preferences.Get("token", "").ToString().Equals(""))
                 MainPage = new NavigationPage(new SignInPage());
             else
                 MainPage = new NavigationPage(new MenuPage());

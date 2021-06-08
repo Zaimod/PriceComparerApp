@@ -4,13 +4,15 @@
             x:Class="PriceComparerApp.Views.MenuPage" Visual="Material"
             xmlns:local="clr-namespace:PriceComparerApp.Views.MenuViews"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom">
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.IsSmoothScrollEnabled="False"
+            android:TabbedPage.IsSwipePagingEnabled="False">
 
     <TabbedPage.Children>
         <local:HomeListPage Title="Home" IconImageSource="homeCatalog.png"/>
-        <local:CatalogPage  Title="Catalog" IconImageSource="catalog.png"/>
+        <local:CatalogPage Title="Catalog" IconImageSource="catalog.png"/>
+        <local:FavouriteItemsPage Title="Favourites" IconImageSource="favouriteLiked.png"/>
         <local:CabinetPage Title="My Cabinet" IconImageSource="cabinet.png"/>
     </TabbedPage.Children>
-    
-     
+
 </TabbedPage>

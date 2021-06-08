@@ -1,7 +1,7 @@
 ﻿using PriceComparerApp.ApiServices;
 using PriceComparerApp.Models.DataTransferObjects;
 using PriceComparerApp.Services;
-using PriceComparerApp.ViewModels.HomeViewModels;
+using PriceComparerApp.ViewModels.CatalogViewModel;
 using PriceComparerApp.Views.SignViews;
 using System;
 using System.Collections.Generic;

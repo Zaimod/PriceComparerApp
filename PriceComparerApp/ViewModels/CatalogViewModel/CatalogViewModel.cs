@@ -90,7 +90,6 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             IsBusy = true;
 
             IEnumerable<CategoryDto> categoryDto = await categoryService.Get();
-            categoryDto = categoryDto.OrderBy(cd => cd.Id);
             while (items.Any())
                 items.RemoveAt(items.Count - 1);
 
