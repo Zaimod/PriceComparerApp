@@ -13,6 +13,10 @@ namespace PriceComparerApp.Android
     [Activity(Label = "PriceComparerApp", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        /// <summary>
+        /// Called when [create].
+        /// </summary>
+        /// <param name="bundle">The bundle.</param>
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -32,11 +36,23 @@ namespace PriceComparerApp.Android
             LoadApplication(new App());
         }
 
+        /// <summary>
+        /// Called when [back pressed].
+        /// </summary>
         public override void OnBackPressed()
         {
             Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
 
+        /// <summary>
+        /// To be added.
+        /// </summary>
+        /// <param name="requestCode">To be added.</param>
+        /// <param name="permissions">To be added.</param>
+        /// <param name="grantResults">To be added.</param>
+        /// <remarks>
+        /// Portions of this page are modifications based on work created and shared by the <format type="text/html"><a href="https://developers.google.com/terms/site-policies" title="Android Open Source Project">Android Open Source Project</a></format> and used according to terms described in the <format type="text/html"><a href="https://creativecommons.org/licenses/by/2.5/" title="Creative Commons 2.5 Attribution License">Creative Commons 2.5 Attribution License.</a></format>
+        /// </remarks>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

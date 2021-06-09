@@ -13,6 +13,9 @@ namespace PriceComparerApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MenuPage"/> class.
+        /// </summary>
         public MenuPage()
         {
             InitializeComponent();

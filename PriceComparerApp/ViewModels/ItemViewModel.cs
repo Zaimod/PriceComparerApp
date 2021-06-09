@@ -26,7 +26,9 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         public ICommand BackCommand { protected set; get; }
         public INavigation Navigation { get; set; }
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ItemViewModel"/> class.
+        /// </summary>
         public ItemViewModel()
         {
             items = new ObservableCollection<CatalogDto>();
@@ -34,6 +36,13 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         }
 
         private bool _isRefreshing = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is refreshing.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is refreshing; otherwise, <c>false</c>.
+        /// </value>
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -45,6 +54,13 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         }
 
         private bool isBusy;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is busy; otherwise, <c>false</c>.
+        /// </value>
         public bool IsBusy
         {
             get { return isBusy; }
@@ -56,12 +72,25 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is loaded.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is loaded; otherwise, <c>false</c>.
+        /// </value>
         public bool IsLoaded
         {
             get { return !isBusy; }
         }
 
         private int productId;
+
+        /// <summary>
+        /// Gets or sets the product identifier.
+        /// </summary>
+        /// <value>
+        /// The product identifier.
+        /// </value>
         public int ProductId
         {
             get { return productId; }
@@ -73,6 +102,13 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         }
 
         CatalogDto selectedItem;
+
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        /// <value>
+        /// The selected item.
+        /// </value>
         public CatalogDto SelectedItem
         {
             get { return selectedItem; }
@@ -87,12 +123,21 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             }
         }
 
+        /// <summary>
+        /// Handles the selected item.
+        /// </summary>
         private async void HandleSelectedItem()
         {
             //await Navigation.PushAsync(new ItemPage(selectedItem.Id));
             await Browser.OpenAsync(new Uri(selectedItem.Url), BrowserLaunchMode.SystemPreferred);
         }
 
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
+        /// <value>
+        /// The refresh command.
+        /// </value>
         public ICommand RefreshCommand
         {
             get
@@ -108,17 +153,28 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             }
         }
 
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
+        /// <summary>
+        /// Backs this instance.
+        /// </summary>
         private void Back()
         {
             Navigation.PopAsync();
         }
 
+        /// <summary>
+        /// Gets the items.
+        /// </summary>
+        /// <param name="refresh">if set to <c>true</c> [refresh].</param>
         public async Task GetItems(bool refresh = false)
         {
 

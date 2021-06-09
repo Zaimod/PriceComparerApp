@@ -7,6 +7,10 @@ namespace PriceComparerApp.Services
 {
     public interface IMessageService
     {
+        /// <summary>
+        /// Shows the asynchronous.
+        /// </summary>
+        /// <returns></returns>
         Task<string> ShowAsync();
     }
 }

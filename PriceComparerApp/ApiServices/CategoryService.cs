@@ -16,6 +16,10 @@ namespace PriceComparerApp.ApiServices
             PropertyNameCaseInsensitive = true,
         };
 
+        /// <summary>
+        /// Gets the client.
+        /// </summary>
+        /// <returns></returns>
         private HttpClient GetClient()
         {
             HttpClient client = new HttpClient();
@@ -24,6 +28,10 @@ namespace PriceComparerApp.ApiServices
             return client;
         }
 
+        /// <summary>
+        /// Gets this instance.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<CategoryDto>> Get()
         {
             HttpClient client = GetClient();

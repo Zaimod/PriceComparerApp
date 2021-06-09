@@ -21,6 +21,10 @@ namespace PriceComparerApp.Views.MenuViews
         //bool isLoading;
         //Page page;
         public int categoryId = 0;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeListPage"/> class.
+        /// </summary>
         public HomeListPage()
         {            
             InitializeComponent();
@@ -29,6 +33,12 @@ namespace PriceComparerApp.Views.MenuViews
             Subscribe();
         }
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override async void OnAppearing()
         {
             if (categoryId != 0)
@@ -70,7 +80,7 @@ namespace PriceComparerApp.Views.MenuViews
         //    Device.StartTimer(TimeSpan.FromSeconds(2), () => {
         //        for (int i = 0; i < 20; i++)
         //        {
-                     
+
         //        }
         //        page.Title = "Done";
         //        isLoading = false;
@@ -79,6 +89,9 @@ namespace PriceComparerApp.Views.MenuViews
         //    });
         //}
 
+        /// <summary>
+        /// Subscribes this instance.
+        /// </summary>
         private void Subscribe()
         {
             MessagingCenter.Subscribe<App, string>(App.Current, "SortItemsByFilter", (snd, arg) =>
@@ -87,22 +100,41 @@ namespace PriceComparerApp.Views.MenuViews
             });
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickLogout control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void ClickLogout_Clicked(object sender, EventArgs e)
         {
             Preferences.Set("token", "");
             await Navigation.PushAsync(new SignInPage(), true);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickFilterList control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClickFilterList_Clicked(object sender, EventArgs e)
         {
             Navigation.PushPopupAsync(new FilterListPage());
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickSort control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClickSort_Clicked(object sender, EventArgs e)
         {
             Navigation.PushPopupAsync(new SortPage());
         }
 
+        /// <summary>
+        /// Sortings the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
         private void Sorting(string type = null)
         {
             string filterText = type;
@@ -125,6 +157,11 @@ namespace PriceComparerApp.Views.MenuViews
             }
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the searchBar control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             var _container = BindingContext as HomeListViewModel;
@@ -138,6 +175,11 @@ namespace PriceComparerApp.Views.MenuViews
             homeList.EndRefresh();
         }
 
+        /// <summary>
+        /// Handles the Refreshing event of the catalogList control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void catalogList_Refreshing(object sender, EventArgs e)
         {
             var _container = BindingContext as HomeListViewModel;

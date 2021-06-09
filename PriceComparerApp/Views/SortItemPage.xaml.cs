@@ -19,6 +19,11 @@ namespace PriceComparerApp.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the isPriceDescending control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void isPriceDescending_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byPriceDesc";
@@ -26,6 +31,11 @@ namespace PriceComparerApp.Views
             Navigation.PopPopupAsync();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the isPriceAscending control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void isPriceAscending_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byPriceAsc";
@@ -33,6 +43,11 @@ namespace PriceComparerApp.Views
             Navigation.PopPopupAsync();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the IsAscendingAlhabet control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void IsAscendingAlhabet_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byAscending";
@@ -40,6 +55,11 @@ namespace PriceComparerApp.Views
             Navigation.PopPopupAsync();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the IsDescendingAlhabet control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void IsDescendingAlhabet_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byDescending";
@@ -47,6 +67,11 @@ namespace PriceComparerApp.Views
             Navigation.PopPopupAsync();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the isPopularityDesc control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void isPopularityDesc_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byPopularityDesc";
@@ -54,6 +79,11 @@ namespace PriceComparerApp.Views
             Navigation.PopPopupAsync();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the isPopularityAsc control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CheckedChangedEventArgs"/> instance containing the event data.</param>
         private void isPopularityAsc_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             filterName = "byPopularityAsc";

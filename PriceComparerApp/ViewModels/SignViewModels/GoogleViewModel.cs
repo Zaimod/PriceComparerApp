@@ -14,6 +14,12 @@ namespace PriceComparerApp.ViewModels.SignViewModels
         private GoogleProfile _googleProfile;
         private readonly GoogleServices _googleServices;
 
+        /// <summary>
+        /// Gets or sets the google profile.
+        /// </summary>
+        /// <value>
+        /// The google profile.
+        /// </value>
         public GoogleProfile GoogleProfile
         {
             get { return _googleProfile; }
@@ -24,11 +30,19 @@ namespace PriceComparerApp.ViewModels.SignViewModels
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GoogleViewModel"/> class.
+        /// </summary>
         public GoogleViewModel()
         {
             _googleServices = new GoogleServices();
         }
 
+        /// <summary>
+        /// Gets the access token asynchronous.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <returns></returns>
         public async Task<string> GetAccessTokenAsync(string code)
         {
 
@@ -37,6 +51,10 @@ namespace PriceComparerApp.ViewModels.SignViewModels
             return accessToken;
         }
 
+        /// <summary>
+        /// Sets the google user profile asynchronous.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
         public async Task SetGoogleUserProfileAsync(string accessToken)
         {
 
@@ -45,6 +63,10 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

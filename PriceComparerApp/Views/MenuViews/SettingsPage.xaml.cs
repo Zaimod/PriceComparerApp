@@ -17,6 +17,11 @@ namespace PriceComparerApp.Views.MenuViews
     {
         CabinetPageViewModel cabinetPageViewModel;
         UserDto dtoUser;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingsPage"/> class.
+        /// </summary>
+        /// <param name="user">The user.</param>
         public SettingsPage(UserDto user)
         {
             cabinetPageViewModel = new CabinetPageViewModel();
@@ -26,6 +31,10 @@ namespace PriceComparerApp.Views.MenuViews
             dtoUser.Email = user.Email;
         }
 
+        /// <summary>
+        /// Initializes the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
         private void Initialize(UserDto user)
         {
             entryUserName.Text = user.UserName;
@@ -38,6 +47,11 @@ namespace PriceComparerApp.Views.MenuViews
             }
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Button control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Button_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(App.Current as App, "SaveNewInformation", "_saving");
@@ -46,6 +60,9 @@ namespace PriceComparerApp.Views.MenuViews
             await PopupNavigation.Instance.PopAsync();
         }
 
+        /// <summary>
+        /// Initializes the dto for saving.
+        /// </summary>
         private void InitializeDtoForSaving()
         {
             dtoUser.UserName = entryUserName.Text;

@@ -17,6 +17,11 @@ namespace PriceComparerApp.ApiServices
             PropertyNameCaseInsensitive = true,
         };
 
+        /// <summary>
+        /// Gets the user.
+        /// </summary>
+        /// <param name="login">The login.</param>
+        /// <returns></returns>
         public async Task<UserDto> GetUser(string login)
         {
             var httpClient = new HttpClient();
@@ -25,6 +30,11 @@ namespace PriceComparerApp.ApiServices
             return System.Text.Json.JsonSerializer.Deserialize<UserDto>(result, options);
         }
 
+        /// <summary>
+        /// Updates the user.
+        /// </summary>
+        /// <param name="dto">The dto.</param>
+        /// <returns></returns>
         public async Task<bool> UpdateUser(UserDto dto)
         {
             var httpClient = new HttpClient();

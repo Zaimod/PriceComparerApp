@@ -27,6 +27,9 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         public ICommand BackCommand { protected set; get; }
         public INavigation Navigation { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogViewModel"/> class.
+        /// </summary>
         public CatalogViewModel()
         {
             items = new ObservableCollection<CategoryDto>();
@@ -34,6 +37,12 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
         }
 
         private bool isBusy;
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is busy; otherwise, <c>false</c>.
+        /// </value>
         public bool IsBusy
         {
             get { return isBusy; }
@@ -45,12 +54,24 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is loaded.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is loaded; otherwise, <c>false</c>.
+        /// </value>
         public bool IsLoaded
         {
             get { return !isBusy; }
         }
 
         CategoryDto selectedItem;
+        /// <summary>
+        /// Gets or sets the selected item.
+        /// </summary>
+        /// <value>
+        /// The selected item.
+        /// </value>
         public CategoryDto SelectedItem
         {
             get { return selectedItem; }
@@ -64,18 +85,27 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
                 }
             }
         }
-
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
+        /// <summary>
+        /// Backs this instance.
+        /// </summary>
         private void Back()
         {
             Navigation.PopAsync();
         }
 
+        /// <summary>
+        /// Handles the selected item.
+        /// </summary>
         private async void HandleSelectedItem()
         {
             HomeListPage home = new HomeListPage() { categoryId = selectedItem.Id };
@@ -83,6 +113,9 @@ namespace PriceComparerApp.ViewModels.CatalogViewModel
             await Navigation.PushAsync(home);
         }
 
+        /// <summary>
+        /// Gets the items.
+        /// </summary>
         public async Task GetItems()
         {
             if (initialized == true)

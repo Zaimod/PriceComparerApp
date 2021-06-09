@@ -16,6 +16,10 @@ namespace PriceComparerApp.ApiServices
             PropertyNameCaseInsensitive = true,
         };
 
+        /// <summary>
+        /// Gets the client.
+        /// </summary>
+        /// <returns></returns>
         private HttpClient GetClient()
         {
             HttpClient client = new HttpClient();
@@ -24,6 +28,10 @@ namespace PriceComparerApp.ApiServices
             return client;
         }
 
+        /// <summary>
+        /// Gets the products.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             HttpClient client = GetClient();
@@ -32,6 +40,11 @@ namespace PriceComparerApp.ApiServices
             return JsonSerializer.Deserialize<IEnumerable<ProductDto>>(result, options);
         }
 
+        /// <summary>
+        /// Gets the products by category.
+        /// </summary>
+        /// <param name="categoryId">The category identifier.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<ProductDto>> GetProductsByCategory(int categoryId)
         {
             HttpClient client = GetClient();
