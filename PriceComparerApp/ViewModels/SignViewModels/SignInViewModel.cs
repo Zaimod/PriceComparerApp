@@ -46,12 +46,20 @@ namespace PriceComparerApp.ViewModels.SignViewModels
             }
         }
         public ICommand SubmitCommand { set; get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignInViewModel"/> class.
+        /// </summary>
         public SignInViewModel()
         {
             this.messageService = DependencyService.Get<IMessageService>();
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
+
+        /// <summary>
+        /// Called when [submit].
+        /// </summary>
         public async void OnSubmit()
         {
             var response = await signService.SignIn(login, password);
@@ -83,7 +91,11 @@ namespace PriceComparerApp.ViewModels.SignViewModels
                 }             
             }
         }
-        
+
+        /// <summary>
+        /// Gets the catalog list page.
+        /// </summary>
+        /// <param name="response">The response.</param>
         public void GetCatalogListPage(TokenResponse response)
         {
             catalogListpage = new NavigationPage(new MenuPage());

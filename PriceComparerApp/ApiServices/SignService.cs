@@ -12,6 +12,12 @@ namespace PriceComparerApp.ApiServices
 {
     public class SignService
     {
+        /// <summary>
+        /// Signs the in.
+        /// </summary>
+        /// <param name="login">The login.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public async Task<TokenResponse> SignIn(string login, string password)
         {
             var httpClient = new HttpClient();
@@ -25,6 +31,11 @@ namespace PriceComparerApp.ApiServices
             return result;
         }
 
+        /// <summary>
+        /// Signs up.
+        /// </summary>
+        /// <param name="dto">The dto.</param>
+        /// <returns></returns>
         public async Task<bool> SignUp(UserForSignUpDto dto)
         {
             var httpClient = new HttpClient();
@@ -35,6 +46,11 @@ namespace PriceComparerApp.ApiServices
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Sends the verification code.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
         public async Task<bool> SendVerificationCode(string userName)
         {
             var httpClient = new HttpClient();
@@ -46,6 +62,12 @@ namespace PriceComparerApp.ApiServices
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Changes the email confirmed.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
         public async Task<bool> ChangeEmailConfirmed(string code, string userName)
         {
             var httpClient = new HttpClient();

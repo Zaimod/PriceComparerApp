@@ -92,12 +92,16 @@ namespace PriceComparerApp.ViewModels.SignViewModels
 
         public ICommand SubmitCommand { set; get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignUpViewModel"/> class.
+        /// </summary>
         public SignUpViewModel()
         {
             this.messageService = DependencyService.Get<IMessageService>();
             signService = new SignService();
             SubmitCommand = new Command(OnSubmit);
         }
+
         public async void OnSubmit()
         {
             UserForSignUpDto dto = new UserForSignUpDto()

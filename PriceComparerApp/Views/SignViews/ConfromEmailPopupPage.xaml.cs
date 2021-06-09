@@ -12,6 +12,9 @@ namespace PriceComparerApp.Views.SignViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Popup : ContentView
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Popup"/> class.
+        /// </summary>
         public Popup()
         {
             InitializeComponent();

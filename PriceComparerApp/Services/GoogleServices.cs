@@ -15,6 +15,11 @@ namespace PriceComparerApp.Services
         public static readonly string ClientSecret = "VJNmvrbK00yLoSBiRrpAgisx";
         public static readonly string RedirectUri = "https://www.youtube.com/channel/UCwiVJ3xwJUvgioIsRnMeCDA";
 
+        /// <summary>
+        /// Gets the access token asynchronous.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <returns></returns>
         public async Task<string> GetAccessTokenAsync(string code)
         {
             var requestUrl =
@@ -36,6 +41,11 @@ namespace PriceComparerApp.Services
             return accessToken;
         }
 
+        /// <summary>
+        /// Gets the google user profile asynchronous.
+        /// </summary>
+        /// <param name="accessToken">The access token.</param>
+        /// <returns></returns>
         public async Task<GoogleProfile> GetGoogleUserProfileAsync(string accessToken)
         {
 

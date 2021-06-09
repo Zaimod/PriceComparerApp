@@ -17,6 +17,10 @@ namespace PriceComparerApp.Views.MenuViews
     public partial class CabinetPage : ContentPage
     {
         CabinetPageViewModel cabinetPageViewModel;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CabinetPage"/> class.
+        /// </summary>
         public CabinetPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -25,6 +29,12 @@ namespace PriceComparerApp.Views.MenuViews
             Subscribe();
         }
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override async void OnAppearing()
         {
             
@@ -33,6 +43,9 @@ namespace PriceComparerApp.Views.MenuViews
             Initialize();
         }
 
+        /// <summary>
+        /// Subscribes this instance.
+        /// </summary>
         private void Subscribe()
         {
             MessagingCenter.Subscribe<App, string>(App.Current, "SaveNewInformation",  (snd, arg) =>
@@ -41,6 +54,9 @@ namespace PriceComparerApp.Views.MenuViews
             });
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
         private void Initialize()
         {
             entryUserName.Text = cabinetPageViewModel.items.UserName;
@@ -53,12 +69,22 @@ namespace PriceComparerApp.Views.MenuViews
             }
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Logout control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Logout_Clicked(object sender, EventArgs e)
         {
             Preferences.Set("token", "");
             await Navigation.PushAsync(new SignInPage(), true);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Settings control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Settings_Clicked(object sender, EventArgs e)
         {
             Navigation.PushPopupAsync(new SettingsPage(cabinetPageViewModel.items));

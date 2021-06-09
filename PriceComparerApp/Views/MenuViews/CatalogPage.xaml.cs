@@ -15,6 +15,10 @@ namespace PriceComparerApp.Views.MenuViews
     public partial class CatalogPage : ContentPage
     {
         CatalogViewModel catalogViewModel;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CatalogPage"/> class.
+        /// </summary>
         public CatalogPage()
         {
             InitializeComponent();
@@ -23,12 +27,23 @@ namespace PriceComparerApp.Views.MenuViews
 
         }
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override async void OnAppearing()
         {
             await catalogViewModel.GetItems();
             base.OnAppearing();
         }
 
+        /// <summary>
+        /// Handles the TextChanged event of the searchBar control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             var _container = BindingContext as CatalogViewModel;
@@ -42,17 +57,32 @@ namespace PriceComparerApp.Views.MenuViews
             collectView.BatchCommit();
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickSort control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClickSort_Clicked(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Logout control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Logout_Clicked(object sender, EventArgs e)
         {
             Preferences.Set("token", "");
             await Navigation.PushAsync(new SignInPage(), true);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Settings control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Settings_Clicked(object sender, EventArgs e)
         {
 

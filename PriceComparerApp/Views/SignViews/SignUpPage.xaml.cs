@@ -13,6 +13,10 @@ namespace PriceComparerApp.Views.SignViews
     public partial class SignUpPage : ContentPage
     {
         SignUpViewModel vm = new SignUpViewModel();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignUpPage"/> class.
+        /// </summary>
         public SignUpPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
@@ -47,11 +51,22 @@ namespace PriceComparerApp.Views.SignViews
                 vm.SubmitCommand.Execute(null);
             };
         }
+
+        /// <summary>
+        /// Called when [close button clicked].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void OnCloseButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PopModalAsync();
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickSignUp control.
+        /// </summary>
+        /// <param name="sender_click">The source of the event.</param>
+        /// <param name="e_click">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClickSignUp_Clicked(object sender_click, EventArgs e_click)
         {
             if (FirstName.TextColor.R == 1 || LastName.TextColor.R == 1 || UserName.TextColor.R == 1 ||

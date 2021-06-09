@@ -18,6 +18,10 @@ namespace PriceComparerApp.Views.SignViews
     {
         SignInViewModel vm = new SignInViewModel();
         private readonly GoogleViewModel _googleViewModel;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignInPage"/> class.
+        /// </summary>
         public SignInPage()
         {         
             NavigationPage.SetHasNavigationBar(this, false);
@@ -40,16 +44,31 @@ namespace PriceComparerApp.Views.SignViews
             };
         }
 
+        /// <summary>
+        /// Called when [close button clicked].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void OnCloseButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PopModalAsync();
         }
 
+        /// <summary>
+        /// Handles the Tapped event of the TapSignUp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TapSignUp_Tapped(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SignUpPage());
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ClickSignIn control.
+        /// </summary>
+        /// <param name="sender_click">The source of the event.</param>
+        /// <param name="e_click">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClickSignIn_Clicked(object sender_click, EventArgs e_click)
         {
             if (Login.TextColor.R == 1 || Password.TextColor.R == 1)
@@ -67,6 +86,11 @@ namespace PriceComparerApp.Views.SignViews
             }
         }
 
+        /// <summary>
+        /// Handles the Tapped event of the TapSignGoogle control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TapSignGoogle_Tapped(object sender, EventArgs e)
         {          
           
@@ -88,6 +112,11 @@ namespace PriceComparerApp.Views.SignViews
             Content = webView;
         }
 
+        /// <summary>
+        /// Webs the view on navigated.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="WebNavigatedEventArgs"/> instance containing the event data.</param>
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)
         {
 
@@ -103,6 +132,11 @@ namespace PriceComparerApp.Views.SignViews
             }
         }
 
+        /// <summary>
+        /// Extracts the code from URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns></returns>
         private string ExtractCodeFromUrl(string url)
         {
             if (url.Contains("code="))

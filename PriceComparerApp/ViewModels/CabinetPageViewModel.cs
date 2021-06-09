@@ -26,6 +26,9 @@ namespace PriceComparerApp.ViewModels
         public ICommand BackCommand { protected set; get; }
         public INavigation Navigation { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CabinetPageViewModel"/> class.
+        /// </summary>
         public CabinetPageViewModel()
         {
             items = new UserDto();
@@ -33,6 +36,13 @@ namespace PriceComparerApp.ViewModels
         }
 
         private bool isBusy;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is busy; otherwise, <c>false</c>.
+        /// </value>
         public bool IsBusy
         {
             get { return isBusy; }
@@ -45,6 +55,13 @@ namespace PriceComparerApp.ViewModels
         }
 
         private bool _isRefreshing = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is refreshing.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is refreshing; otherwise, <c>false</c>.
+        /// </value>
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -55,17 +72,30 @@ namespace PriceComparerApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is loaded.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is loaded; otherwise, <c>false</c>.
+        /// </value>
         public bool IsLoaded
         {
             get { return !isBusy; }
         }
 
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
         protected void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
+        /// <summary>
+        /// Backs this instance.
+        /// </summary>
         private void Back()
         {
             Navigation.PopAsync();
@@ -86,6 +116,10 @@ namespace PriceComparerApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the user.
+        /// </summary>
+        /// <param name="refresh">if set to <c>true</c> [refresh].</param>
         public async Task GetUser(bool refresh = false)
         {       
             IsBusy = true;
@@ -98,6 +132,10 @@ namespace PriceComparerApp.ViewModels
             initialized = true;
         }
 
+        /// <summary>
+        /// Saves the user information.
+        /// </summary>
+        /// <param name="items">The items.</param>
         public async Task SaveUserInformation(UserDto items)
         {
             await userService.UpdateUser(items);
